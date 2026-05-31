@@ -84,8 +84,8 @@ export default function TabsLayout() {
                       ? "#FFF9EF"
                       : "#210B05"
                     : isDark
-                    ? "rgba(255,255,255,0.08)"
-                    : "rgba(255,255,255,0.72)",
+                      ? "rgba(255,255,255,0.08)"
+                      : "rgba(255,255,255,0.72)",
                 }}
               >
                 <Icon

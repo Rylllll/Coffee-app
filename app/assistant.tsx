@@ -1,9 +1,9 @@
 import { Bot, Coffee, MapPin, Sparkles, Send } from "lucide-react-native";
 import { useState } from "react";
-import { View, TextInput, Pressable, ScrollView, ActivityIndicator } from "react-native";
+import { View, TextInput, Pressable, ActivityIndicator } from "react-native";
 import { BrewText } from "@/components/ui/BrewText";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { Pill } from "@/components/ui/Pill";
+
 import { Screen } from "@/components/ui/Screen";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useBrewAnalytics } from "@/hooks/useBrewAnalytics";
@@ -11,17 +11,18 @@ import { useBrewStore } from "@/src/stores/useBrewStore";
 
 export default function AssistantScreen() {
   const cafes = useBrewStore((state) => state.cafes);
-  const beans = useBrewStore((state) => state.beans);
-  const recipes = useBrewStore((state) => state.recipes);
+  const _beans = useBrewStore((state) => state.beans);
+  const _recipes = useBrewStore((state) => state.recipes);
   const coffees = useBrewStore((state) => state.coffees);
   const user = useBrewStore((state) => state.user);
   const openAiApiKey = useBrewStore((state) => state.openAiApiKey);
   const { dna, caffeine } = useBrewAnalytics();
 
   const savedCafe = cafes.find((cafe) => cafe.saved) ?? cafes[0];
-  const bean = beans[0];
-  const recipe = recipes[0];
-  const hasTasteData = dna.favoriteType !== "Unknown" || dna.favoriteRoast !== "Unknown";
+  const _bean = beans[0];
+  const _recipe = recipes[0];
+  const hasTasteData =
+    dna.favoriteType !== "Unknown" || dna.favoriteRoast !== "Unknown";
 
   const [customPrompt, setCustomPrompt] = useState("");
   const [aiResponse, setAiResponse] = useState<string | null>(null);
@@ -30,7 +31,9 @@ export default function AssistantScreen() {
 
   const getAIRecommendation = async () => {
     if (!openAiApiKey) {
-      setError("Please add your OpenAI API Key in Settings to use AI insights.");
+      setError(
+        "Please add your OpenAI API Key in Settings to use AI insights.",
+      );
       return;
     }
 
@@ -44,31 +47,35 @@ export default function AssistantScreen() {
       Favorite Roast: ${dna.favoriteRoast}
       Preferred Time Window: ${dna.preferredTimeWindow}
       Total Coffees Logged: ${coffees.length}
-      Recent Cafes: ${cafes.map(c => c.name).join(", ")}
-      Recent Beans: ${beans.map(b => b.name).join(", ")}
+      Recent Cafes: ${cafes.map((c) => c.name).join(", ")}
+      Recent Beans: ${beans.map((b) => b.name).join(", ")}
     `;
 
     try {
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${openAiApiKey}`,
+      const response = await fetch(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${openAiApiKey}`,
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            messages: [
+              {
+                role: "system",
+                content:
+                  "You are a friendly, knowledgeable coffee assistant inside the BrewSpace app. Provide a short, personalized recommendation or insight (2-3 sentences) based on the user's data.",
+              },
+              {
+                role: "user",
+                content: `Here is my data: ${context}. ${customPrompt ? `My specific request: ${customPrompt}` : "Give me a recommendation on what coffee to drink or which cafe to visit next."}`,
+              },
+            ],
+          }),
         },
-        body: JSON.stringify({
-          model: "gpt-4o-mini",
-          messages: [
-            {
-              role: "system",
-              content: "You are a friendly, knowledgeable coffee assistant inside the BrewSpace app. Provide a short, personalized recommendation or insight (2-3 sentences) based on the user's data.",
-            },
-            {
-              role: "user",
-              content: `Here is my data: ${context}. ${customPrompt ? `My specific request: ${customPrompt}` : "Give me a recommendation on what coffee to drink or which cafe to visit next."}`,
-            },
-          ],
-        }),
-      });
+      );
 
       const data = await response.json();
 
@@ -91,7 +98,8 @@ export default function AssistantScreen() {
         <BrewText variant="caption">AI Coffee Assistant</BrewText>
         <BrewText variant="hero">Smart insights</BrewText>
         <BrewText>
-          Powered by OpenAI, using your stored data to give personalized coffee advice.
+          Powered by OpenAI, using your stored data to give personalized coffee
+          advice.
         </BrewText>
       </View>
 
@@ -127,7 +135,9 @@ export default function AssistantScreen() {
 
           {aiResponse && (
             <View className="mt-4 p-4 rounded-xl bg-sage/10 border border-sage/20">
-              <BrewText className="text-base leading-relaxed">{aiResponse}</BrewText>
+              <BrewText className="text-base leading-relaxed">
+                {aiResponse}
+              </BrewText>
             </View>
           )}
         </View>
@@ -165,7 +175,9 @@ export default function AssistantScreen() {
             <View className="flex-1">
               <BrewText className="font-semibold">Drink</BrewText>
               <BrewText>
-                {hasTasteData ? `Try another ${dna.favoriteType} and compare your rating.` : "Log coffee ratings to unlock drink suggestions."}
+                {hasTasteData
+                  ? `Try another ${dna.favoriteType} and compare your rating.`
+                  : "Log coffee ratings to unlock drink suggestions."}
               </BrewText>
             </View>
           </View>
@@ -173,7 +185,11 @@ export default function AssistantScreen() {
             <MapPin size={22} color="#7C9A78" />
             <View className="flex-1">
               <BrewText className="font-semibold">Cafe</BrewText>
-              <BrewText>{savedCafe ? `${savedCafe.name}: ${savedCafe.recommendation}` : "Save cafes to improve suggestions."}</BrewText>
+              <BrewText>
+                {savedCafe
+                  ? `${savedCafe.name}: ${savedCafe.recommendation}`
+                  : "Save cafes to improve suggestions."}
+              </BrewText>
             </View>
           </View>
         </View>

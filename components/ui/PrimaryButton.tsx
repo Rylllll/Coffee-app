@@ -1,7 +1,11 @@
 import * as Haptics from "expo-haptics";
 import { ReactNode } from "react";
 import { Pressable, View } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
 import { cn } from "@/src/utils/cn";
 import { BrewText } from "@/components/ui/BrewText";
 
@@ -14,7 +18,14 @@ interface PrimaryButtonProps {
   className?: string;
 }
 
-export function PrimaryButton({ label, onPress, icon, variant = "primary", disabled, className }: PrimaryButtonProps) {
+export function PrimaryButton({
+  label,
+  onPress,
+  icon,
+  variant = "primary",
+  disabled,
+  className,
+}: PrimaryButtonProps) {
   const scale = useSharedValue(1);
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
@@ -41,7 +52,8 @@ export function PrimaryButton({ label, onPress, icon, variant = "primary", disab
         className={cn(
           "min-h-14 flex-row items-center justify-center gap-2 rounded-full px-6",
           variant === "primary" && "bg-espresso dark:bg-crema",
-          variant === "secondary" && "border border-white/70 bg-white/75 dark:border-white/10 dark:bg-white/10",
+          variant === "secondary" &&
+            "border border-white/70 bg-white/75 dark:border-white/10 dark:bg-white/10",
           variant === "ghost" && "bg-white/0",
           disabled && "opacity-50",
           className,

@@ -12,7 +12,12 @@ export function MoodSelector({ value, onChange }: MoodSelectorProps) {
   return (
     <View className="flex-row flex-wrap gap-2">
       {moods.map((mood) => (
-        <Pill key={mood} label={mood} selected={value === mood} onPress={() => onChange(mood)} />
+        <Pill
+          key={mood}
+          label={mood}
+          selected={value === mood}
+          onPress={() => onChange(mood)}
+        />
       ))}
     </View>
   );

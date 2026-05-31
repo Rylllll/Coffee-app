@@ -44,7 +44,6 @@ export default function HomeScreen() {
     <Screen>
       {/* Main Container with generous spacing for a modern, uncluttered feel */}
       <View className="gap-7 pb-24 pt-2">
-        
         {/* HEADER */}
         <Animated.View
           entering={FadeInDown.duration(400).springify()}
@@ -71,12 +70,17 @@ export default function HomeScreen() {
         </Animated.View>
 
         {/* HERO CARD */}
-        <Animated.View entering={FadeInDown.delay(100).duration(400).springify()}>
+        <Animated.View
+          entering={FadeInDown.delay(100).duration(400).springify()}
+        >
           <GlassCard className="overflow-hidden" contentClassName="p-0">
             <View className="min-h-[280px] p-7">
               <View className="max-w-[240px] gap-2">
                 <View className="self-start rounded-full bg-orange/20 px-3 py-1">
-                  <BrewText variant="caption" className="text-orange-700 font-bold">
+                  <BrewText
+                    variant="caption"
+                    className="text-orange-700 font-bold"
+                  >
                     Caramel Cloud
                   </BrewText>
                 </View>
@@ -84,7 +88,11 @@ export default function HomeScreen() {
                   Sip, track and explore your coffee world
                 </BrewText>
               </View>
-              <CoffeeArt size="md" className="absolute -bottom-2 -right-2 opacity-90" label="Today" />
+              <CoffeeArt
+                size="md"
+                className="absolute -bottom-2 -right-2 opacity-90"
+                label="Today"
+              />
             </View>
           </GlassCard>
         </Animated.View>
@@ -105,7 +113,7 @@ export default function HomeScreen() {
                       "min-h-[60px] flex-row items-center justify-center gap-2 rounded-2xl px-3 shadow-sm",
                       isPrimary
                         ? "bg-espresso dark:bg-crema"
-                        : "bg-white/80 dark:bg-white/10"
+                        : "bg-white/80 dark:bg-white/10",
                     )}
                   >
                     <Icon
@@ -116,7 +124,7 @@ export default function HomeScreen() {
                     <BrewText
                       className={cn(
                         "font-bold",
-                        isPrimary && "text-crema dark:text-espresso"
+                        isPrimary && "text-crema dark:text-espresso",
                       )}
                     >
                       {item.label}
@@ -129,7 +137,10 @@ export default function HomeScreen() {
         </Animated.View>
 
         {/* OVERVIEW BENTO GRID */}
-        <Animated.View entering={FadeInDown.delay(300).duration(400).springify()} className="gap-4">
+        <Animated.View
+          entering={FadeInDown.delay(300).duration(400).springify()}
+          className="gap-4"
+        >
           <SectionHeader eyebrow="Today" title="Overview" />
           <View className="flex-row gap-3">
             <MetricCard
@@ -148,11 +159,16 @@ export default function HomeScreen() {
             <View className="gap-5">
               <View className="flex-row items-start justify-between">
                 <View className="flex-1 gap-1">
-                  <BrewText variant="caption" className="uppercase tracking-wider opacity-60">
+                  <BrewText
+                    variant="caption"
+                    className="uppercase tracking-wider opacity-60"
+                  >
                     Caffeine Intelligence
                   </BrewText>
                   <BrewText variant="subtitle" className="text-lg">
-                    {caffeine.isOverLimit ? "Slow down today" : "Inside your range"}
+                    {caffeine.isOverLimit
+                      ? "Slow down today"
+                      : "Inside your range"}
                   </BrewText>
                 </View>
                 <View className="h-12 w-12 items-center justify-center rounded-full bg-orange/15">
@@ -172,7 +188,10 @@ export default function HomeScreen() {
         </Animated.View>
 
         {/* COFFEE DNA */}
-        <Animated.View entering={FadeInDown.delay(400).duration(400).springify()} className="gap-4">
+        <Animated.View
+          entering={FadeInDown.delay(400).duration(400).springify()}
+          className="gap-4"
+        >
           <SectionHeader eyebrow="Coffee DNA" title={dna.persona} />
           <GlassCard>
             <View className="gap-4">
@@ -184,19 +203,30 @@ export default function HomeScreen() {
                 ))}
               </View>
               <View className="mt-1 flex-row flex-wrap gap-2">
-                <Pill label={`${dna.favoriteType}`} selected={dna.favoriteType !== "Unknown"} />
-                <Pill label={`${dna.favoriteRoast}`} selected={dna.favoriteRoast !== "Unknown"} />
+                <Pill
+                  label={`${dna.favoriteType}`}
+                  selected={dna.favoriteType !== "Unknown"}
+                />
+                <Pill
+                  label={`${dna.favoriteRoast}`}
+                  selected={dna.favoriteRoast !== "Unknown"}
+                />
               </View>
             </View>
           </GlassCard>
         </Animated.View>
 
         {/* RECENT COFFEES */}
-        <Animated.View entering={FadeInDown.delay(500).duration(400).springify()} className="gap-4">
+        <Animated.View
+          entering={FadeInDown.delay(500).duration(400).springify()}
+          className="gap-4"
+        >
           <SectionHeader eyebrow="Memories" title="Recent coffees" />
           <View className="gap-3">
             {recent.length > 0 ? (
-              recent.map((coffee) => <CoffeeCard key={coffee.id} coffee={coffee} />)
+              recent.map((coffee) => (
+                <CoffeeCard key={coffee.id} coffee={coffee} />
+              ))
             ) : (
               <EmptyState
                 title="No coffees yet"
@@ -217,7 +247,10 @@ export default function HomeScreen() {
         </Animated.View>
 
         {/* INSIGHTS & AI */}
-        <Animated.View entering={FadeInDown.delay(600).duration(400).springify()} className="gap-4">
+        <Animated.View
+          entering={FadeInDown.delay(600).duration(400).springify()}
+          className="gap-4"
+        >
           <SectionHeader eyebrow="Productivity" title="Correlation insight" />
           <GlassCard>
             <BrewText className="leading-relaxed">{productivity}</BrewText>
@@ -248,7 +281,10 @@ export default function HomeScreen() {
         </Animated.View>
 
         {/* WRAPPED BUTTON */}
-        <Animated.View entering={FadeInDown.delay(700).duration(400).springify()} className="mt-4">
+        <Animated.View
+          entering={FadeInDown.delay(700).duration(400).springify()}
+          className="mt-4"
+        >
           <Link href="/wrapped" asChild>
             <Pressable className="min-h-[64px] flex-row items-center justify-center gap-3 rounded-2xl bg-orange shadow-sm active:scale-95 px-5">
               <CalendarDays size={20} color="#210B05" strokeWidth={2.5} />
@@ -258,7 +294,6 @@ export default function HomeScreen() {
             </Pressable>
           </Link>
         </Animated.View>
-
       </View>
     </Screen>
   );

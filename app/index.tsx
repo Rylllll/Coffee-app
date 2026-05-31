@@ -12,7 +12,9 @@ export default function IndexRoute() {
     return (
       <View className="flex-1 items-center justify-center bg-espresso">
         <ActivityIndicator color="#C96B38" />
-        <BrewText className="mt-3 text-crema">Preparing your coffee shelf...</BrewText>
+        <BrewText className="mt-3 text-crema">
+          Preparing your coffee shelf...
+        </BrewText>
       </View>
     );
   }

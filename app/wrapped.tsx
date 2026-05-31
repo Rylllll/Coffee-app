@@ -36,7 +36,11 @@ export default function WrappedScreen() {
           detail={`${formatCurrency(wrapped.totalSpending)} spent, led by ${wrapped.favoriteDrink}.`}
         />
       </View>
-      <PrimaryButton label="Share story card" onPress={shareStory} icon={<Share2 size={18} color="#FFF9EF" />} />
+      <PrimaryButton
+        label="Share story card"
+        onPress={shareStory}
+        icon={<Share2 size={18} color="#FFF9EF" />}
+      />
       <GlassCard>
         <View className="gap-3">
           <Row label="Favorite cafe" value={wrapped.favoriteCafe} />

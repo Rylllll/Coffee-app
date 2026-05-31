@@ -13,7 +13,10 @@ interface StoryCardProps {
 export function StoryCard({ title, value, detail, children }: StoryCardProps) {
   return (
     <View className="h-[500px] overflow-hidden rounded-[42px] bg-espresso">
-      <LinearGradient colors={["#210B05", "#5C3A2A", "#C96B38", "#F4E5D7"]} className="absolute inset-0" />
+      <LinearGradient
+        colors={["#210B05", "#5C3A2A", "#C96B38", "#F4E5D7"]}
+        className="absolute inset-0"
+      />
       <View className="absolute -right-14 top-10 h-44 w-44 rounded-full bg-white/20" />
       <View className="absolute bottom-24 left-8 h-28 w-28 rounded-full bg-orange/25" />
       <View className="flex-1 justify-between p-6">
@@ -26,7 +29,9 @@ export function StoryCard({ title, value, detail, children }: StoryCardProps) {
           </BrewText>
         </View>
         <View className="gap-4">
-          <BrewText className="text-7xl font-black tracking-[-3px] text-crema">{value}</BrewText>
+          <BrewText className="text-7xl font-black tracking-[-3px] text-crema">
+            {value}
+          </BrewText>
           <BrewText className="text-lg text-crema/85">{detail}</BrewText>
           {children}
         </View>

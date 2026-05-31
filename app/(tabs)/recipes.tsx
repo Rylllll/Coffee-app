@@ -60,14 +60,26 @@ export default function RecipesScreen() {
           />
           <View className="flex-row flex-wrap gap-2">
             {brewMethods.map((item) => (
-              <Pill key={item} label={item} selected={method === item} onPress={() => setMethod(item)} />
+              <Pill
+                key={item}
+                label={item}
+                selected={method === item}
+                onPress={() => setMethod(item)}
+              />
             ))}
           </View>
-          <PrimaryButton label="Save recipe" onPress={saveRecipe} icon={<Plus size={18} color="#FFF9EF" />} />
+          <PrimaryButton
+            label="Save recipe"
+            onPress={saveRecipe}
+            icon={<Plus size={18} color="#FFF9EF" />}
+          />
         </View>
       </GlassCard>
 
-      <SectionHeader eyebrow={`${recipes.length} recipes`} title="Saved brews" />
+      <SectionHeader
+        eyebrow={`${recipes.length} recipes`}
+        title="Saved brews"
+      />
       <View className="gap-3">
         {recipes.length > 0 ? (
           recipes.map((recipe) => (
@@ -90,7 +102,10 @@ export default function RecipesScreen() {
             </GlassCard>
           ))
         ) : (
-          <EmptyState title="No recipes yet" body="Create your first brew recipe to start building your library." />
+          <EmptyState
+            title="No recipes yet"
+            body="Create your first brew recipe to start building your library."
+          />
         )}
       </View>
     </Screen>

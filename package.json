@@ -41,9 +41,12 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/react": "~19.2.2",
     "babel-preset-expo": "^56.0.14",
-    "typescript": "~6.0.3"
+    "eslint": "^10.4.1",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.60.0"
   },
   "scripts": {
     "start": "expo start",

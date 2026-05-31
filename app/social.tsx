@@ -28,20 +28,34 @@ export default function SocialScreen() {
               <View className="gap-4 p-4">
                 <View className="flex-row items-center justify-between">
                   <View>
-                    <BrewText className="font-semibold">{post.authorName}</BrewText>
+                    <BrewText className="font-semibold">
+                      {post.authorName}
+                    </BrewText>
                     <BrewText className="text-sm">
                       {post.coffeeName} - {post.cafeName}
                     </BrewText>
                   </View>
-                  <BrewText className="font-semibold text-orange">{post.rating}/10</BrewText>
+                  <BrewText className="font-semibold text-orange">
+                    {post.rating}/10
+                  </BrewText>
                 </View>
               </View>
-              <Image source={{ uri: post.photoUri }} className="h-72 w-full bg-latte" />
+              <Image
+                source={{ uri: post.photoUri }}
+                className="h-72 w-full bg-latte"
+              />
               <View className="gap-4 p-4">
                 <BrewText>{post.caption}</BrewText>
                 <View className="flex-row items-center gap-4">
-                  <Pressable onPress={() => togglePostLike(post.id)} className="flex-row items-center gap-2">
-                    <Heart size={20} color="#C96B38" fill={post.likedByMe ? "#C96B38" : "transparent"} />
+                  <Pressable
+                    onPress={() => togglePostLike(post.id)}
+                    className="flex-row items-center gap-2"
+                  >
+                    <Heart
+                      size={20}
+                      color="#C96B38"
+                      fill={post.likedByMe ? "#C96B38" : "transparent"}
+                    />
                     <BrewText>{post.likes}</BrewText>
                   </Pressable>
                   <View className="flex-row items-center gap-2">
@@ -57,7 +71,12 @@ export default function SocialScreen() {
                 <View className="flex-row items-center gap-2">
                   <TextInput
                     value={commentText[post.id] ?? ""}
-                    onChangeText={(text) => setCommentText((current) => ({ ...current, [post.id]: text }))}
+                    onChangeText={(text) =>
+                      setCommentText((current) => ({
+                        ...current,
+                        [post.id]: text,
+                      }))
+                    }
                     placeholder="Add a comment"
                     placeholderTextColor="#8F7868"
                     className="min-h-12 flex-1 rounded-full border border-white/70 bg-white/75 px-5 text-espresso dark:border-white/10 dark:bg-white/10 dark:text-crema"
@@ -67,7 +86,10 @@ export default function SocialScreen() {
                       const text = commentText[post.id]?.trim();
                       if (!text) return;
                       addComment(post.id, text);
-                      setCommentText((current) => ({ ...current, [post.id]: "" }));
+                      setCommentText((current) => ({
+                        ...current,
+                        [post.id]: "",
+                      }));
                     }}
                     className="h-12 w-12 items-center justify-center rounded-full bg-espresso dark:bg-crema"
                   >
@@ -78,7 +100,10 @@ export default function SocialScreen() {
             </GlassCard>
           ))
         ) : (
-          <EmptyState title="No posts yet" body="Coffee cards from people you follow will appear here." />
+          <EmptyState
+            title="No posts yet"
+            body="Coffee cards from people you follow will appear here."
+          />
         )}
       </View>
     </Screen>

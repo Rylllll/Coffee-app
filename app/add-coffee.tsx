@@ -12,7 +12,12 @@ import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { Screen } from "@/components/ui/Screen";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useBrewStore } from "@/src/stores/useBrewStore";
-import type { CoffeeSource, CoffeeType, Mood, RoastLevel } from "@/src/types/brew";
+import type {
+  CoffeeSource,
+  CoffeeType,
+  Mood,
+  RoastLevel,
+} from "@/src/types/brew";
 
 export default function AddCoffeeScreen() {
   const addCoffee = useBrewStore((state) => state.addCoffee);
@@ -41,7 +46,11 @@ export default function AddCoffeeScreen() {
   };
 
   const toggleTag = (tag: string) => {
-    setTags((current) => (current.includes(tag) ? current.filter((item) => item !== tag) : [...current, tag]));
+    setTags((current) =>
+      current.includes(tag)
+        ? current.filter((item) => item !== tag)
+        : [...current, tag],
+    );
   };
 
   const save = () => {
@@ -72,7 +81,10 @@ export default function AddCoffeeScreen() {
           <BrewText variant="caption">New memory</BrewText>
           <BrewText variant="title">Log coffee</BrewText>
         </View>
-        <Pressable onPress={() => router.back()} className="h-12 w-12 items-center justify-center rounded-full bg-white/70 dark:bg-white/10">
+        <Pressable
+          onPress={() => router.back()}
+          className="h-12 w-12 items-center justify-center rounded-full bg-white/70 dark:bg-white/10"
+        >
           <X size={20} color="#C96B38" />
         </Pressable>
       </View>
@@ -80,7 +92,10 @@ export default function AddCoffeeScreen() {
       <Pressable onPress={pickPhoto}>
         <GlassCard contentClassName="p-0">
           {photoUri ? (
-            <Image source={{ uri: photoUri }} className="h-56 w-full rounded-[34px]" />
+            <Image
+              source={{ uri: photoUri }}
+              className="h-56 w-full rounded-[34px]"
+            />
           ) : (
             <View className="h-56 items-center justify-center gap-3 rounded-[34px] bg-white/45 dark:bg-white/10">
               <View className="h-16 w-16 items-center justify-center rounded-full bg-espresso dark:bg-crema">
@@ -94,27 +109,65 @@ export default function AddCoffeeScreen() {
 
       <GlassCard>
         <View className="gap-4">
-          <Field label="Coffee name" value={name} onChangeText={setName} placeholder="Latte, espresso, pour over" />
-          <Field label="Shop name" value={shopName} onChangeText={setShopName} placeholder="Cafe name or home" />
+          <Field
+            label="Coffee name"
+            value={name}
+            onChangeText={setName}
+            placeholder="Latte, espresso, pour over"
+          />
+          <Field
+            label="Shop name"
+            value={shopName}
+            onChangeText={setShopName}
+            placeholder="Cafe name or home"
+          />
           <View className="flex-row gap-3">
-            <Field label="Price" value={price} onChangeText={setPrice} keyboardType="decimal-pad" placeholder="0.00" />
-            <Field label="Rating 1-10" value={rating} onChangeText={setRating} keyboardType="number-pad" placeholder="8" />
+            <Field
+              label="Price"
+              value={price}
+              onChangeText={setPrice}
+              keyboardType="decimal-pad"
+              placeholder="0.00"
+            />
+            <Field
+              label="Rating 1-10"
+              value={rating}
+              onChangeText={setRating}
+              keyboardType="number-pad"
+              placeholder="8"
+            />
           </View>
-          <Field label="Notes" value={notes} onChangeText={setNotes} multiline placeholder="What made this cup memorable?" />
+          <Field
+            label="Notes"
+            value={notes}
+            onChangeText={setNotes}
+            multiline
+            placeholder="What made this cup memorable?"
+          />
         </View>
       </GlassCard>
 
       <SectionHeader eyebrow="Type" title="What did you drink?" />
       <View className="flex-row flex-wrap gap-2">
         {coffeeTypes.map((item) => (
-          <Pill key={item} label={item} selected={type === item} onPress={() => setType(item)} />
+          <Pill
+            key={item}
+            label={item}
+            selected={type === item}
+            onPress={() => setType(item)}
+          />
         ))}
       </View>
 
       <SectionHeader eyebrow="Source" title="Cafe or homemade?" />
       <View className="flex-row gap-2">
         {(["Cafe", "Homemade"] as const).map((item) => (
-          <Pill key={item} label={item} selected={source === item} onPress={() => setSource(item)} />
+          <Pill
+            key={item}
+            label={item}
+            selected={source === item}
+            onPress={() => setSource(item)}
+          />
         ))}
       </View>
 
@@ -126,16 +179,30 @@ export default function AddCoffeeScreen() {
       <SectionHeader eyebrow="Roast and tags" title="Coffee context" />
       <View className="flex-row flex-wrap gap-2">
         {roastLevels.map((item) => (
-          <Pill key={item} label={item} selected={roastLevel === item} onPress={() => setRoastLevel(item)} />
+          <Pill
+            key={item}
+            label={item}
+            selected={roastLevel === item}
+            onPress={() => setRoastLevel(item)}
+          />
         ))}
       </View>
       <View className="flex-row flex-wrap gap-2">
         {tagSuggestions.map((item) => (
-          <Pill key={item} label={item} selected={tags.includes(item)} onPress={() => toggleTag(item)} />
+          <Pill
+            key={item}
+            label={item}
+            selected={tags.includes(item)}
+            onPress={() => toggleTag(item)}
+          />
         ))}
       </View>
 
-      <PrimaryButton label="Save coffee" onPress={save} icon={<Check size={18} color="#FFF9EF" />} />
+      <PrimaryButton
+        label="Save coffee"
+        onPress={save}
+        icon={<Check size={18} color="#FFF9EF" />}
+      />
     </Screen>
   );
 }
@@ -149,7 +216,14 @@ interface FieldProps {
   placeholder?: string;
 }
 
-function Field({ label, value, onChangeText, keyboardType = "default", multiline, placeholder }: FieldProps) {
+function Field({
+  label,
+  value,
+  onChangeText,
+  keyboardType = "default",
+  multiline,
+  placeholder,
+}: FieldProps) {
   return (
     <View className="flex-1 gap-2">
       <BrewText variant="caption">{label}</BrewText>

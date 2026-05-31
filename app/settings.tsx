@@ -40,7 +40,10 @@ export default function SettingsScreen() {
         title: "BrewSpace reminder",
         body: "Log today's coffee memory and check your caffeine range.",
       },
-      trigger: { type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL, seconds: 10 },
+      trigger: {
+        type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+        seconds: 10,
+      },
     });
     setNotificationStatus("Local reminder scheduled");
   };
@@ -57,7 +60,12 @@ export default function SettingsScreen() {
           <SectionHeader eyebrow="Appearance" title="Theme" />
           <View className="flex-row flex-wrap gap-2">
             {themes.map((item) => (
-              <Pill key={item} label={item} selected={theme === item} onPress={() => setTheme(item)} />
+              <Pill
+                key={item}
+                label={item}
+                selected={theme === item}
+                onPress={() => setTheme(item)}
+              />
             ))}
           </View>
         </View>
@@ -93,7 +101,11 @@ export default function SettingsScreen() {
         <View className="gap-4">
           <SectionHeader eyebrow="Push notifications" title="Local reminders" />
           <BrewText>{notificationStatus}</BrewText>
-          <PrimaryButton label="Schedule reminder" onPress={scheduleReminder} variant="secondary" />
+          <PrimaryButton
+            label="Schedule reminder"
+            onPress={scheduleReminder}
+            variant="secondary"
+          />
         </View>
       </GlassCard>
 
@@ -101,10 +113,22 @@ export default function SettingsScreen() {
         <View className="gap-4">
           <SectionHeader eyebrow="Storage" title="Device-only data" />
           <BrewText>
-            BrewSpace stores authentication state, coffees, recipes, cafes, collection, social activity, and settings in AsyncStorage on this device.
+            BrewSpace stores authentication state, coffees, recipes, cafes,
+            collection, social activity, and settings in AsyncStorage on this
+            device.
           </BrewText>
-          <PrimaryButton label="Clear local records" onPress={clearLocalData} variant="secondary" icon={<Trash2 size={18} color="#C96B38" />} />
-          <PrimaryButton label="Sign out locally" onPress={signOut} variant="ghost" icon={<LogOut size={18} color="#C96B38" />} />
+          <PrimaryButton
+            label="Clear local records"
+            onPress={clearLocalData}
+            variant="secondary"
+            icon={<Trash2 size={18} color="#C96B38" />}
+          />
+          <PrimaryButton
+            label="Sign out locally"
+            onPress={signOut}
+            variant="ghost"
+            icon={<LogOut size={18} color="#C96B38" />}
+          />
         </View>
       </GlassCard>
     </Screen>

@@ -1,4 +1,9 @@
-import type { BrewMethod, CoffeeType, Mood, RoastLevel } from "@/src/types/brew";
+import type {
+  BrewMethod,
+  CoffeeType,
+  Mood,
+  RoastLevel,
+} from "@/src/types/brew";
 
 export const coffeeTypes: CoffeeType[] = [
   "Latte",
@@ -12,9 +17,26 @@ export const coffeeTypes: CoffeeType[] = [
   "Mocha",
 ];
 
-export const brewMethods: BrewMethod[] = ["V60", "Aeropress", "French Press", "Chemex", "Espresso"];
-export const roastLevels: RoastLevel[] = ["Light", "Medium", "Medium-Dark", "Dark"];
-export const moods: Mood[] = ["Tired", "Stressed", "Focused", "Happy", "Productive"];
+export const brewMethods: BrewMethod[] = [
+  "V60",
+  "Aeropress",
+  "French Press",
+  "Chemex",
+  "Espresso",
+];
+export const roastLevels: RoastLevel[] = [
+  "Light",
+  "Medium",
+  "Medium-Dark",
+  "Dark",
+];
+export const moods: Mood[] = [
+  "Tired",
+  "Stressed",
+  "Focused",
+  "Happy",
+  "Productive",
+];
 
 export const tagSuggestions = [
   "sweet",
@@ -29,7 +51,14 @@ export const tagSuggestions = [
   "late-night",
 ];
 
-export const originCountries = ["Brazil", "Colombia", "Ethiopia", "Kenya", "Vietnam", "Indonesia"] as const;
+export const originCountries = [
+  "Brazil",
+  "Colombia",
+  "Ethiopia",
+  "Kenya",
+  "Vietnam",
+  "Indonesia",
+] as const;
 
 export const caffeineByType: Record<CoffeeType, number> = {
   Latte: 120,
