@@ -66,6 +66,8 @@ export interface Cafe {
   saved: boolean;
   isTrending?: boolean;
   isHiddenGem?: boolean;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface BucketListItem {
