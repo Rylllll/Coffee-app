@@ -41,9 +41,23 @@ export default function LoginScreen() {
 
       <GlassCard>
         <View className="gap-4">
-          <Field label="Name" value={name} onChangeText={setName} placeholder="Your name" />
-          <Field label="Email" value={email} onChangeText={setEmail} placeholder="you@example.com" />
-          <PrimaryButton label="Enter BrewSpace" onPress={handleSignIn} icon={<LogIn size={18} color="#FFF9EF" />} />
+          <Field
+            label="Name"
+            value={name}
+            onChangeText={setName}
+            placeholder="Your name"
+          />
+          <Field
+            label="Email"
+            value={email}
+            onChangeText={setEmail}
+            placeholder="you@example.com"
+          />
+          <PrimaryButton
+            label="Enter BrewSpace"
+            onPress={handleSignIn}
+            icon={<LogIn size={18} color="#FFF9EF" />}
+          />
         </View>
       </GlassCard>
     </Screen>

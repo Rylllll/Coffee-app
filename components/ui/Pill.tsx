@@ -19,7 +19,14 @@ export function Pill({ label, selected, onPress }: PillProps) {
           : "border-white/70 bg-white/60 dark:border-white/10 dark:bg-white/10",
       )}
     >
-      <BrewText className={cn("text-sm font-bold", selected && "text-crema dark:text-espresso")}>{label}</BrewText>
+      <BrewText
+        className={cn(
+          "text-sm font-bold",
+          selected && "text-crema dark:text-espresso",
+        )}
+      >
+        {label}
+      </BrewText>
     </Pressable>
   );
 }

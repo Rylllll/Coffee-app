@@ -12,14 +12,20 @@ import { formatCurrency } from "@/src/utils/analytics";
 export default function StatsScreen() {
   const coffees = useBrewStore((state) => state.coffees);
   const { caffeine, spending } = useBrewAnalytics();
-  const chartData = coffees.slice(0, 7).reverse().map((entry, index) => ({
-    day: index + 1,
-    caffeine: entry.caffeineMg,
-  }));
-  const ratingData = coffees.slice(0, 7).reverse().map((entry, index) => ({
-    day: index + 1,
-    rating: entry.rating,
-  }));
+  const chartData = coffees
+    .slice(0, 7)
+    .reverse()
+    .map((entry, index) => ({
+      day: index + 1,
+      caffeine: entry.caffeineMg,
+    }));
+  const ratingData = coffees
+    .slice(0, 7)
+    .reverse()
+    .map((entry, index) => ({
+      day: index + 1,
+      rating: entry.rating,
+    }));
   const hasCaffeineData = chartData.length > 0;
   const hasRatingData = ratingData.length > 0;
   const useNativeCharts = Platform.OS !== "web";
@@ -36,7 +42,10 @@ export default function StatsScreen() {
       </View>
       <View className="flex-row gap-3">
         <MetricCard label="Monthly caffeine" value={`${caffeine.monthMg}mg`} />
-        <MetricCard label="Monthly spend" value={formatCurrency(spending.monthly)} />
+        <MetricCard
+          label="Monthly spend"
+          value={formatCurrency(spending.monthly)}
+        />
       </View>
 
       <SectionHeader eyebrow="Chart" title="Recent caffeine" />
@@ -44,10 +53,20 @@ export default function StatsScreen() {
         <View className="h-64">
           {hasCaffeineData ? (
             useNativeCharts ? (
-              <CartesianChart data={chartData} xKey="day" yKeys={["caffeine"]} domainPadding={{ left: 24, right: 24, top: 16 }}>
+              <CartesianChart
+                data={chartData}
+                xKey="day"
+                yKeys={["caffeine"]}
+                domainPadding={{ left: 24, right: 24, top: 16 }}
+              >
                 {({ points, chartBounds }) =>
                   points.caffeine ? (
-                    <Bar points={points.caffeine} chartBounds={chartBounds} color="#C96B38" roundedCorners={{ topLeft: 12, topRight: 12 }} />
+                    <Bar
+                      points={points.caffeine}
+                      chartBounds={chartBounds}
+                      color="#C96B38"
+                      roundedCorners={{ topLeft: 12, topRight: 12 }}
+                    />
                   ) : null
                 }
               </CartesianChart>
@@ -56,7 +75,10 @@ export default function StatsScreen() {
             )
           ) : (
             <View className="flex-1 items-center justify-center px-6">
-              <BrewText variant="body" className="text-center text-espresso-500">
+              <BrewText
+                variant="body"
+                className="text-center text-espresso-500"
+              >
                 Log your first coffee to unlock caffeine charts.
               </BrewText>
             </View>
@@ -69,15 +91,33 @@ export default function StatsScreen() {
         <View className="h-60">
           {hasRatingData ? (
             useNativeCharts ? (
-              <CartesianChart data={ratingData} xKey="day" yKeys={["rating"]} domain={{ y: [0, 10] }} domainPadding={{ left: 16, right: 16 }}>
-                {({ points }) => (points.rating ? <Line points={points.rating} color="#7C9A78" strokeWidth={4} curveType="natural" /> : null)}
+              <CartesianChart
+                data={ratingData}
+                xKey="day"
+                yKeys={["rating"]}
+                domain={{ y: [0, 10] }}
+                domainPadding={{ left: 16, right: 16 }}
+              >
+                {({ points }) =>
+                  points.rating ? (
+                    <Line
+                      points={points.rating}
+                      color="#7C9A78"
+                      strokeWidth={4}
+                      curveType="natural"
+                    />
+                  ) : null
+                }
               </CartesianChart>
             ) : (
               <RatingFallbackChart data={ratingData} />
             )
           ) : (
             <View className="flex-1 items-center justify-center px-6">
-              <BrewText variant="body" className="text-center text-espresso-500">
+              <BrewText
+                variant="body"
+                className="text-center text-espresso-500"
+              >
                 Add rated coffees to see your taste trends.
               </BrewText>
             </View>

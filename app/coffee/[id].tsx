@@ -1,5 +1,13 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { ArrowLeft, Heart, MapPin, Minus, Plus, Star, Zap } from "lucide-react-native";
+import {
+  ArrowLeft,
+  Heart,
+  MapPin,
+  Minus,
+  Plus,
+  Star,
+  Zap,
+} from "lucide-react-native";
 import { Image, Pressable, View } from "react-native";
 import { CoffeeArt } from "@/components/CoffeeArt";
 import { BrewText } from "@/components/ui/BrewText";
@@ -14,8 +22,12 @@ import { cn } from "@/src/utils/cn";
 
 export default function CoffeeDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const coffee = useBrewStore((state) => state.coffees.find((entry) => entry.id === id));
-  const toggleCoffeeFavorite = useBrewStore((state) => state.toggleCoffeeFavorite);
+  const coffee = useBrewStore((state) =>
+    state.coffees.find((entry) => entry.id === id),
+  );
+  const toggleCoffeeFavorite = useBrewStore(
+    (state) => state.toggleCoffeeFavorite,
+  );
 
   if (!coffee) {
     return (
@@ -33,14 +45,25 @@ export default function CoffeeDetailScreen() {
       <View className="flex-row items-center justify-between">
         <PrimaryBack />
         <BrewText variant="subtitle">{coffee.name}</BrewText>
-        <Pressable onPress={() => toggleCoffeeFavorite(coffee.id)} className="h-12 w-12 items-center justify-center rounded-full bg-white/70 dark:bg-white/10">
-          <Heart size={20} color="#C96B38" fill={coffee.isFavorite ? "#C96B38" : "transparent"} />
+        <Pressable
+          onPress={() => toggleCoffeeFavorite(coffee.id)}
+          className="h-12 w-12 items-center justify-center rounded-full bg-white/70 dark:bg-white/10"
+        >
+          <Heart
+            size={20}
+            color="#C96B38"
+            fill={coffee.isFavorite ? "#C96B38" : "transparent"}
+          />
         </Pressable>
       </View>
 
       <GlassCard contentClassName="items-center gap-4 p-6">
         {coffee.photoUri ? (
-          <Image source={{ uri: coffee.photoUri }} className="h-80 w-full rounded-[42px] bg-latte" resizeMode="cover" />
+          <Image
+            source={{ uri: coffee.photoUri }}
+            className="h-80 w-full rounded-[42px] bg-latte"
+            resizeMode="cover"
+          />
         ) : (
           <CoffeeArt size="lg" label={coffee.type} />
         )}
@@ -48,14 +71,18 @@ export default function CoffeeDetailScreen() {
       </GlassCard>
 
       <View className="gap-2">
-        <BrewText variant="caption">{new Date(coffee.drankAt).toLocaleString()}</BrewText>
+        <BrewText variant="caption">
+          {new Date(coffee.drankAt).toLocaleString()}
+        </BrewText>
         <BrewText variant="hero">{coffee.name}</BrewText>
         <View className="flex-row flex-wrap items-center gap-3">
           <View className="flex-row items-center gap-1 rounded-full bg-white/70 px-3 py-2 dark:bg-white/10">
             <Star size={18} color="#F4B400" fill="#F4B400" />
             <BrewText className="font-bold">{coffee.rating}/10</BrewText>
           </View>
-          <BrewText className="rounded-full bg-cocoa px-4 py-2 font-black text-crema">{formatCurrency(coffee.price)}</BrewText>
+          <BrewText className="rounded-full bg-cocoa px-4 py-2 font-black text-crema">
+            {formatCurrency(coffee.price)}
+          </BrewText>
         </View>
       </View>
 
@@ -77,8 +104,23 @@ export default function CoffeeDetailScreen() {
       <View className="flex-row items-center justify-between">
         <View className="flex-row gap-3">
           {["S", "M", "L"].map((size) => (
-            <View key={size} className={cn("h-14 w-14 items-center justify-center rounded-full", size === "M" ? "bg-espresso dark:bg-crema" : "bg-white/70 dark:bg-white/10")}>
-              <BrewText className={cn("font-bold", size === "M" && "text-crema dark:text-espresso")}>{size}</BrewText>
+            <View
+              key={size}
+              className={cn(
+                "h-14 w-14 items-center justify-center rounded-full",
+                size === "M"
+                  ? "bg-espresso dark:bg-crema"
+                  : "bg-white/70 dark:bg-white/10",
+              )}
+            >
+              <BrewText
+                className={cn(
+                  "font-bold",
+                  size === "M" && "text-crema dark:text-espresso",
+                )}
+              >
+                {size}
+              </BrewText>
             </View>
           ))}
         </View>
@@ -93,9 +135,16 @@ export default function CoffeeDetailScreen() {
         </View>
       </View>
 
-      <SectionHeader eyebrow="Mood memory" title={`${coffee.moodBefore} to ${coffee.moodAfter ?? "Unknown"}`} />
+      <SectionHeader
+        eyebrow="Mood memory"
+        title={`${coffee.moodBefore} to ${coffee.moodAfter ?? "Unknown"}`}
+      />
       <View className="flex-row flex-wrap gap-2">
-        {coffee.tags.length > 0 ? coffee.tags.map((tag) => <Pill key={tag} label={tag} selected />) : <Pill label="No tags yet" />}
+        {coffee.tags.length > 0 ? (
+          coffee.tags.map((tag) => <Pill key={tag} label={tag} selected />)
+        ) : (
+          <Pill label="No tags yet" />
+        )}
       </View>
 
       {coffee.people?.length ? (
@@ -111,7 +160,10 @@ export default function CoffeeDetailScreen() {
 
 function PrimaryBack() {
   return (
-    <Pressable onPress={() => router.back()} className="h-12 w-12 items-center justify-center rounded-full bg-white/70 dark:bg-white/10">
+    <Pressable
+      onPress={() => router.back()}
+      className="h-12 w-12 items-center justify-center rounded-full bg-white/70 dark:bg-white/10"
+    >
       <ArrowLeft size={20} color="#210B05" />
     </Pressable>
   );

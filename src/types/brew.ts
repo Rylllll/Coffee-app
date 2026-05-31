@@ -12,9 +12,20 @@ export type CoffeeType =
 export type CoffeeSource = "Cafe" | "Homemade";
 export type RoastLevel = "Light" | "Medium" | "Medium-Dark" | "Dark";
 export type Mood = "Tired" | "Stressed" | "Focused" | "Happy" | "Productive";
-export type BrewMethod = "V60" | "Aeropress" | "French Press" | "Chemex" | "Espresso";
+export type BrewMethod =
+  | "V60"
+  | "Aeropress"
+  | "French Press"
+  | "Chemex"
+  | "Espresso";
 export type ThemePreference = "system" | "light" | "dark";
-export type CoffeeOrigin = "Brazil" | "Colombia" | "Ethiopia" | "Kenya" | "Vietnam" | "Indonesia";
+export type CoffeeOrigin =
+  | "Brazil"
+  | "Colombia"
+  | "Ethiopia"
+  | "Kenya"
+  | "Vietnam"
+  | "Indonesia";
 
 export interface UserProfile {
   id: string;
@@ -49,7 +60,10 @@ export interface CoffeeEntry {
   isFavorite?: boolean;
 }
 
-export type CoffeeDraft = Omit<CoffeeEntry, "id" | "createdAt" | "caffeineMg"> & {
+export type CoffeeDraft = Omit<
+  CoffeeEntry,
+  "id" | "createdAt" | "caffeineMg"
+> & {
   caffeineMg?: number;
 };
 

@@ -77,15 +77,29 @@ export default function CollectionScreen() {
           />
           <View className="flex-row flex-wrap gap-2">
             {originCountries.map((country) => (
-              <Pill key={country} label={country} selected={originCountry === country} onPress={() => setOriginCountry(country)} />
+              <Pill
+                key={country}
+                label={country}
+                selected={originCountry === country}
+                onPress={() => setOriginCountry(country)}
+              />
             ))}
           </View>
           <View className="flex-row flex-wrap gap-2">
             {roastLevels.map((level) => (
-              <Pill key={level} label={level} selected={roastLevel === level} onPress={() => setRoastLevel(level)} />
+              <Pill
+                key={level}
+                label={level}
+                selected={roastLevel === level}
+                onPress={() => setRoastLevel(level)}
+              />
             ))}
           </View>
-          <PrimaryButton label="Add beans" onPress={saveBean} icon={<Plus size={18} color="#FFF9EF" />} />
+          <PrimaryButton
+            label="Add beans"
+            onPress={saveBean}
+            icon={<Plus size={18} color="#FFF9EF" />}
+          />
         </View>
       </GlassCard>
 
@@ -98,7 +112,8 @@ export default function CollectionScreen() {
                 <View>
                   <BrewText variant="subtitle">{bean.name}</BrewText>
                   <BrewText>
-                    {bean.roaster || "No roaster"} - {bean.originCountry} - {bean.roastLevel}
+                    {bean.roaster || "No roaster"} - {bean.originCountry} -{" "}
+                    {bean.roastLevel}
                   </BrewText>
                 </View>
                 <View className="flex-row flex-wrap gap-2">
@@ -106,13 +121,19 @@ export default function CollectionScreen() {
                     <Pill key={note} label={note} />
                   ))}
                   <Pill label={`${bean.gramsRemaining}g`} selected />
-                  <Pill label={getBeanExpiryLabel(bean)} selected={getBeanExpiryLabel(bean) !== "Expired"} />
+                  <Pill
+                    label={getBeanExpiryLabel(bean)}
+                    selected={getBeanExpiryLabel(bean) !== "Expired"}
+                  />
                 </View>
               </View>
             </GlassCard>
           ))
         ) : (
-          <EmptyState title="No beans yet" body="Add your first bag to start tracking freshness and origins." />
+          <EmptyState
+            title="No beans yet"
+            body="Add your first bag to start tracking freshness and origins."
+          />
         )}
       </View>
     </Screen>

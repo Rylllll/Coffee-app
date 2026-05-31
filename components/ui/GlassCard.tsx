@@ -10,7 +10,11 @@ interface GlassCardProps {
   contentClassName?: string;
 }
 
-export function GlassCard({ children, className, contentClassName }: GlassCardProps) {
+export function GlassCard({
+  children,
+  className,
+  contentClassName,
+}: GlassCardProps) {
   const { colorScheme } = useColorScheme();
 
   return (
@@ -30,7 +34,11 @@ export function GlassCard({ children, className, contentClassName }: GlassCardPr
         web: { boxShadow: "0 22px 60px rgba(33, 11, 5, 0.10)" } as never,
       })}
     >
-      <BlurView intensity={38} tint={colorScheme === "dark" ? "dark" : "light"} style={StyleSheet.absoluteFill} />
+      <BlurView
+        intensity={38}
+        tint={colorScheme === "dark" ? "dark" : "light"}
+        style={StyleSheet.absoluteFill}
+      />
       <View className="absolute inset-x-0 top-0 h-px bg-white/90 dark:bg-white/20" />
       <View className={cn("p-5", contentClassName)}>{children}</View>
     </View>

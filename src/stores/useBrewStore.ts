@@ -6,17 +6,14 @@ import type {
   BeanCollectionItem,
   BrewRecipe,
   BrewSeed,
-  BucketListItem,
-  Cafe,
   CoffeeDraft,
   CoffeeEntry,
-  SocialPost,
   ThemePreference,
   UserProfile,
-  WorkSession,
 } from "@/src/types/brew";
 
-const makeId = (prefix: string) => `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+const makeId = (prefix: string) =>
+  `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 const emptyBrewData: BrewSeed = {
   coffees: [],
   cafes: [],
@@ -28,7 +25,9 @@ const emptyBrewData: BrewSeed = {
 };
 
 const isLegacyDemoUser = (user: UserProfile | null | undefined) =>
-  user?.name === "Rey" || user?.email === "local@brewspace.app" || user?.avatarUrl?.includes("images.unsplash.com/photo-1544005313");
+  user?.name === "Rey" ||
+  user?.email === "local@brewspace.app" ||
+  user?.avatarUrl?.includes("images.unsplash.com/photo-1544005313");
 
 interface BrewState extends BrewSeed {
   user: UserProfile | null;
@@ -70,7 +69,7 @@ const initialState: BrewState = {
 
 export const useBrewStore = create<BrewStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       ...initialState,
       setHasHydrated: (value) => set({ hasHydrated: value }),
       completeOnboarding: () => set({ hasOnboarded: true }),
@@ -88,7 +87,9 @@ export const useBrewStore = create<BrewStore>()(
       setTheme: (theme) => set({ theme }),
       setCaffeineLimit: (limitMg) =>
         set((state) => ({
-          user: state.user ? { ...state.user, caffeineLimitMg: limitMg } : state.user,
+          user: state.user
+            ? { ...state.user, caffeineLimitMg: limitMg }
+            : state.user,
         })),
       addCoffee: (draft) => {
         const entry: CoffeeEntry = {
@@ -102,19 +103,34 @@ export const useBrewStore = create<BrewStore>()(
       },
       toggleCoffeeFavorite: (id) =>
         set((state) => ({
-          coffees: state.coffees.map((entry) => (entry.id === id ? { ...entry, isFavorite: !entry.isFavorite } : entry)),
+          coffees: state.coffees.map((entry) =>
+            entry.id === id
+              ? { ...entry, isFavorite: !entry.isFavorite }
+              : entry,
+          ),
         })),
       toggleCafeWishlist: (id) =>
         set((state) => ({
-          cafes: state.cafes.map((cafe) => (cafe.id === id ? { ...cafe, saved: !cafe.saved } : cafe)),
+          cafes: state.cafes.map((cafe) =>
+            cafe.id === id ? { ...cafe, saved: !cafe.saved } : cafe,
+          ),
         })),
       toggleBucketProgress: (id) =>
         set((state) => ({
-          bucketList: state.bucketList.map((item) => (item.id === id ? { ...item, completed: !item.completed } : item)),
+          bucketList: state.bucketList.map((item) =>
+            item.id === id ? { ...item, completed: !item.completed } : item,
+          ),
         })),
       addRecipe: (recipe) =>
         set((state) => ({
-          recipes: [{ ...recipe, id: makeId("recipe"), createdAt: new Date().toISOString() }, ...state.recipes],
+          recipes: [
+            {
+              ...recipe,
+              id: makeId("recipe"),
+              createdAt: new Date().toISOString(),
+            },
+            ...state.recipes,
+          ],
         })),
       addBean: (bean) =>
         set((state) => ({
@@ -124,7 +140,11 @@ export const useBrewStore = create<BrewStore>()(
         set((state) => ({
           socialPosts: state.socialPosts.map((post) =>
             post.id === id
-              ? { ...post, likedByMe: !post.likedByMe, likes: post.likedByMe ? post.likes - 1 : post.likes + 1 }
+              ? {
+                  ...post,
+                  likedByMe: !post.likedByMe,
+                  likes: post.likedByMe ? post.likes - 1 : post.likes + 1,
+                }
               : post,
           ),
         })),
@@ -136,7 +156,12 @@ export const useBrewStore = create<BrewStore>()(
                   ...post,
                   comments: [
                     ...post.comments,
-                    { id: makeId("comment"), author: state.user?.name ?? "You", text, createdAt: new Date().toISOString() },
+                    {
+                      id: makeId("comment"),
+                      author: state.user?.name ?? "You",
+                      text,
+                      createdAt: new Date().toISOString(),
+                    },
                   ],
                 }
               : post,
@@ -162,7 +187,7 @@ export const useBrewStore = create<BrewStore>()(
         const state = persistedState as Partial<BrewState> | undefined;
         return {
           ...initialState,
-          user: isLegacyDemoUser(state?.user) ? null : state?.user ?? null,
+          user: isLegacyDemoUser(state?.user) ? null : (state?.user ?? null),
           hasOnboarded: state?.hasOnboarded ?? false,
           theme: state?.theme ?? "system",
           openAiApiKey: state?.openAiApiKey ?? null,
