@@ -65,7 +65,7 @@ const initialState: BrewState = {
   hasOnboarded: false,
   hasHydrated: false,
   theme: "system",
-  openAiApiKey: null,
+  openAiApiKey: null, // SECURITY: Never hardcode or bundle OpenAI keys in client applications. Use Settings UI instead.
 };
 
 export const useBrewStore = create<BrewStore>()(
