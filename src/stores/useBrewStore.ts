@@ -35,6 +35,7 @@ interface BrewState extends BrewSeed {
   hasOnboarded: boolean;
   hasHydrated: boolean;
   theme: ThemePreference;
+  openAiApiKey: string | null;
 }
 
 interface BrewActions {
@@ -53,6 +54,7 @@ interface BrewActions {
   togglePostLike: (id: string) => void;
   addComment: (postId: string, text: string) => void;
   clearLocalData: () => void;
+  setOpenAiApiKey: (key: string | null) => void;
 }
 
 type BrewStore = BrewState & BrewActions;
@@ -63,6 +65,7 @@ const initialState: BrewState = {
   hasOnboarded: false,
   hasHydrated: false,
   theme: "system",
+  openAiApiKey: null,
 };
 
 export const useBrewStore = create<BrewStore>()(
@@ -146,8 +149,10 @@ export const useBrewStore = create<BrewStore>()(
           hasOnboarded: state.hasOnboarded,
           hasHydrated: state.hasHydrated,
           theme: state.theme,
+          openAiApiKey: state.openAiApiKey,
         }));
       },
+      setOpenAiApiKey: (key) => set({ openAiApiKey: key }),
     }),
     {
       name: "brewspace-local-storage-v1",
@@ -160,6 +165,7 @@ export const useBrewStore = create<BrewStore>()(
           user: isLegacyDemoUser(state?.user) ? null : state?.user ?? null,
           hasOnboarded: state?.hasOnboarded ?? false,
           theme: state?.theme ?? "system",
+          openAiApiKey: state?.openAiApiKey ?? null,
         };
       },
       partialize: (state) => ({
@@ -173,6 +179,7 @@ export const useBrewStore = create<BrewStore>()(
         beans: state.beans,
         socialPosts: state.socialPosts,
         workSessions: state.workSessions,
+        openAiApiKey: state.openAiApiKey,
       }),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true);

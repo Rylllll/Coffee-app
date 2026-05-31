@@ -18,6 +18,8 @@ export default function SettingsScreen() {
   const setTheme = useBrewStore((state) => state.setTheme);
   const setCaffeineLimit = useBrewStore((state) => state.setCaffeineLimit);
   const clearLocalData = useBrewStore((state) => state.clearLocalData);
+  const openAiApiKey = useBrewStore((state) => state.openAiApiKey);
+  const setOpenAiApiKey = useBrewStore((state) => state.setOpenAiApiKey);
   const signOut = useBrewStore((state) => state.signOut);
   const [limit, setLimit] = useState(String(user?.caffeineLimitMg ?? 400));
   const [notificationStatus, setNotificationStatus] = useState("Not scheduled");
@@ -71,6 +73,19 @@ export default function SettingsScreen() {
             className="min-h-14 rounded-full border border-white/70 bg-white/75 px-5 text-base text-espresso dark:border-white/10 dark:bg-white/10 dark:text-crema"
           />
           <PrimaryButton label="Save caffeine limit" onPress={saveLimit} />
+        </View>
+      </GlassCard>
+
+      <GlassCard>
+        <View className="gap-4">
+          <SectionHeader eyebrow="AI Assistant" title="OpenAI API Key" />
+          <TextInput
+            value={openAiApiKey ?? ""}
+            onChangeText={setOpenAiApiKey}
+            placeholder="sk-..."
+            secureTextEntry
+            className="min-h-14 rounded-full border border-white/70 bg-white/75 px-5 text-base text-espresso dark:border-white/10 dark:bg-white/10 dark:text-crema"
+          />
         </View>
       </GlassCard>
 
