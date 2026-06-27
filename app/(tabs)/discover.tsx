@@ -8,27 +8,21 @@ import { Screen } from "@/components/ui/Screen";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useBrewStore } from "@/src/stores/useBrewStore";
 import { useColorScheme } from "nativewind";
-
-// Dynamic require to prevent evaluating react-native-maps on web
 const MapView =
   Platform.OS === "web" ? null : require("react-native-maps").default;
 const { Marker } =
   Platform.OS === "web" ? { Marker: null } : require("react-native-maps");
-
 export default function DiscoverScreen() {
   const cafes = useBrewStore((state) => state.cafes);
   const toggleCafeWishlist = useBrewStore((state) => state.toggleCafeWishlist);
   const { colorScheme } = useColorScheme();
-
   const isDark = colorScheme === "dark";
-
   return (
     <Screen>
       <View className="gap-2">
         <BrewText variant="caption">Cafe discovery</BrewText>
         <BrewText variant="hero">Find your next cup</BrewText>
       </View>
-
       <GlassCard contentClassName="p-0">
         <View className="h-72 overflow-hidden rounded-[38px] bg-latte/40 relative">
           {Platform.OS === "web" || !MapView || !Marker ? (
@@ -104,7 +98,6 @@ export default function DiscoverScreen() {
           </View>
         </View>
       </GlassCard>
-
       <SectionHeader
         eyebrow="Trending and hidden gems"
         title="Recommendations"

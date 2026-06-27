@@ -42,9 +42,7 @@ export default function HomeScreen() {
 
   return (
     <Screen>
-      {/* Main Container with generous spacing for a modern, uncluttered feel */}
       <View className="gap-7 pb-24 pt-2">
-        {/* HEADER */}
         <Animated.View
           entering={FadeInDown.duration(400).springify()}
           className="flex-row items-center justify-between"
@@ -69,7 +67,6 @@ export default function HomeScreen() {
           </Pressable>
         </Animated.View>
 
-        {/* HERO CARD */}
         <Animated.View
           entering={FadeInDown.delay(100).duration(400).springify()}
         >
@@ -97,7 +94,6 @@ export default function HomeScreen() {
           </GlassCard>
         </Animated.View>
 
-        {/* QUICK ACTIONS */}
         <Animated.View
           entering={FadeInDown.delay(200).duration(400).springify()}
           className="flex-row gap-3"
@@ -136,7 +132,6 @@ export default function HomeScreen() {
           })}
         </Animated.View>
 
-        {/* OVERVIEW BENTO GRID */}
         <Animated.View
           entering={FadeInDown.delay(300).duration(400).springify()}
           className="gap-4"
@@ -187,7 +182,6 @@ export default function HomeScreen() {
           </GlassCard>
         </Animated.View>
 
-        {/* COFFEE DNA */}
         <Animated.View
           entering={FadeInDown.delay(400).duration(400).springify()}
           className="gap-4"
@@ -216,7 +210,6 @@ export default function HomeScreen() {
           </GlassCard>
         </Animated.View>
 
-        {/* RECENT COFFEES */}
         <Animated.View
           entering={FadeInDown.delay(500).duration(400).springify()}
           className="gap-4"
@@ -246,7 +239,6 @@ export default function HomeScreen() {
           </View>
         </Animated.View>
 
-        {/* INSIGHTS & AI */}
         <Animated.View
           entering={FadeInDown.delay(600).duration(400).springify()}
           className="gap-4"
@@ -280,7 +272,6 @@ export default function HomeScreen() {
           </Link>
         </Animated.View>
 
-        {/* WRAPPED BUTTON */}
         <Animated.View
           entering={FadeInDown.delay(700).duration(400).springify()}
           className="mt-4"

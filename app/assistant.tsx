@@ -19,8 +19,8 @@ export default function AssistantScreen() {
   const { dna, caffeine } = useBrewAnalytics();
 
   const savedCafe = cafes.find((cafe) => cafe.saved) ?? cafes[0];
-  const _bean = beans[0];
-  const _recipe = recipes[0];
+  const _bean = _beans[0];
+  const _recipe = _recipes[0];
   const hasTasteData =
     dna.favoriteType !== "Unknown" || dna.favoriteRoast !== "Unknown";
 
@@ -48,7 +48,7 @@ export default function AssistantScreen() {
       Preferred Time Window: ${dna.preferredTimeWindow}
       Total Coffees Logged: ${coffees.length}
       Recent Cafes: ${cafes.map((c) => c.name).join(", ")}
-      Recent Beans: ${beans.map((b) => b.name).join(", ")}
+      Recent Beans: ${_beans.map((b) => b.name).join(", ")}
     `;
 
     try {

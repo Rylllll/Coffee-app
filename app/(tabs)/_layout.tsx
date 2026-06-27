@@ -31,7 +31,7 @@ export default function TabsLayout() {
 
         return {
           headerShown: false,
-          tabBarShowLabel: false, // We render our own label inside tabBarIcon
+          tabBarShowLabel: false,
           tabBarActiveTintColor: isDark ? "#210B05" : "#FFF9EF",
           tabBarInactiveTintColor: isDark ? "#FFF9EF" : "#210B05",
           tabBarStyle: {
@@ -70,12 +70,11 @@ export default function TabsLayout() {
                 padding: 2,
                 backgroundColor: focused
                   ? isDark
-                    ? "rgba(255, 255, 255, 0.15)" // Outer pill background (Dark Mode)
-                    : "#FFFFFF" // Outer pill background (Light Mode)
+                    ? "rgba(255, 255, 255, 0.15)"
+                    : "#FFFFFF"
                   : "transparent",
               }}
             >
-              {/* Inner Circle Icon Container */}
               <View
                 className="h-12 w-12 items-center justify-center rounded-full"
                 style={{
@@ -95,7 +94,6 @@ export default function TabsLayout() {
                 />
               </View>
 
-              {/* Expanding Text Label */}
               {focused && (
                 <Text
                   className="ml-2 mr-4 font-semibold"

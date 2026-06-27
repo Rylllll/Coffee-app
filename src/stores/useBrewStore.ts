@@ -11,7 +11,6 @@ import type {
   ThemePreference,
   UserProfile,
 } from "@/src/types/brew";
-
 const makeId = (prefix: string) =>
   `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 const emptyBrewData: BrewSeed = {
@@ -23,12 +22,10 @@ const emptyBrewData: BrewSeed = {
   socialPosts: [],
   workSessions: [],
 };
-
 const isLegacyDemoUser = (user: UserProfile | null | undefined) =>
   user?.name === "Rey" ||
   user?.email === "local@brewspace.app" ||
   user?.avatarUrl?.includes("images.unsplash.com/photo-1544005313");
-
 interface BrewState extends BrewSeed {
   user: UserProfile | null;
   hasOnboarded: boolean;
@@ -36,7 +33,6 @@ interface BrewState extends BrewSeed {
   theme: ThemePreference;
   openAiApiKey: string | null;
 }
-
 interface BrewActions {
   setHasHydrated: (value: boolean) => void;
   completeOnboarding: () => void;
@@ -55,18 +51,15 @@ interface BrewActions {
   clearLocalData: () => void;
   setOpenAiApiKey: (key: string | null) => void;
 }
-
 type BrewStore = BrewState & BrewActions;
-
 const initialState: BrewState = {
   ...emptyBrewData,
   user: null,
   hasOnboarded: false,
   hasHydrated: false,
   theme: "system",
-  openAiApiKey: null, // SECURITY: Never hardcode or bundle OpenAI keys in client applications. Use Settings UI instead.
+  openAiApiKey: null,
 };
-
 export const useBrewStore = create<BrewStore>()(
   persist(
     (set) => ({
@@ -212,7 +205,6 @@ export const useBrewStore = create<BrewStore>()(
     },
   ),
 );
-
 export const selectCoffees = (state: BrewStore) => state.coffees;
 export const selectCafes = (state: BrewStore) => state.cafes;
 export const selectBucketList = (state: BrewStore) => state.bucketList;
